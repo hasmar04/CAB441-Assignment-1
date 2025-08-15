@@ -6,8 +6,8 @@ chain ssh_connections {
 
     #        Client                Server
     # ----------------------------------------------
-    ip saddr 172.0.0.1    ip daddr 172.1.1.11           counter goto ssh_policy   # Example showing 172.0.0.1 access to db
-
+    #ip saddr 172.0.0.1    ip daddr 172.1.1.11           counter goto ssh_policy   # Example showing 172.0.0.1 access to db
+    ip saddr 172.1.0.14    ip daddr $internal_subnet    counter goto ssh_policy    # Allow Bastion to access Internal Network
 }
 
 # Rules for anything other than DNS, apt and ssh

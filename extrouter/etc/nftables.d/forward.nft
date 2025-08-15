@@ -6,7 +6,9 @@ chain ssh_connections {
 
     #        Client                Server
     # ----------------------------------------------
-    ip saddr 172.0.0.1    ip daddr 172.1.1.11           counter goto ssh_policy   # Example showing 172.0.0.1 access to db
+    #ip saddr 172.0.0.1    ip daddr 172.1.1.11           counter goto ssh_policy   # Example showing 172.0.0.1 access to db
+    ip saddr 172.0.0.1    ip daddr 172.1.0.14           counter goto ssh_policy   # Host VM SSH to Bastion
+    ip saddr 172.1.0.14 ip daddr $local_subnet          counter goto ssh_policy   # Bastion SSH to Local Subnet
 
 }
 

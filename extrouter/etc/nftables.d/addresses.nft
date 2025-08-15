@@ -14,7 +14,8 @@ define edge_subnet = 172.1.0.0/24
 
 # Incoming connections
 define ssh_allowed_remotes = {                      # Remote hosts that are allowed to ssh to this host
-    172.0.99.1
+    172.0.99.1,
+    172.1.0.14
 }
 
 # External services for outgoing and forwarded connections
