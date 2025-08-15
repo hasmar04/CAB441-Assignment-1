@@ -1,0 +1,15 @@
+chain bogons {
+    # Edge network address and interfaces
+
+        iif $edge_interface ip saddr != $edge_subnet counter log prefix "[nft] edge bogon " drop
+        iif != $edge_interface ip saddr $edge_subnet counter log prefix "[nft] edge subnet spoofed " drop
+
+    # Internal network address and interfaces
+
+        iif $internal_interface ip saddr != $internal_subnet counter log prefix "[nft] internal interface bogon " drop
+        iif != $internal_interface ip saddr != $edge_subnet ip saddr $internal_subnet counter log prefix "[nft] internal subnet spoofed " drop
+
+    # Internet / Outside Traffic
+
+        iif $wan_facing_interface  ip saddr { 0.0.0.0/8, 224.0.0.0/4, 240.0.0.0/4 } counter log prefix "[nft] internet/external/outside bogons " drop
+}
